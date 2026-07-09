@@ -1,0 +1,11 @@
+{:itonami.blueprint/id "cloud-itonami-5222"
+ :itonami.blueprint/name "Community Port Authority and Harbor Operations"
+ :itonami.blueprint/isic-rev5 "5222"
+ :itonami.blueprint/domain :transport/port-authority
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:navigation-safety :supply-resilience :worker-safety]
+ :itonami.blueprint/governor :port-authority-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger :logistics]
+ :itonami.blueprint/optional-technologies [:optimization]
+ :itonami.blueprint/status :public-oss}
