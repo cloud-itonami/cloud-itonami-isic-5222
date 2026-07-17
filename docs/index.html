@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Port Authority and Harbor Operations | cloud-itonami-isic-5222</title>
+  <meta name="description" content="Community Port Authority and Harbor Operations — governed open occupation blueprint (ISIC 5222).">
+  <style>
+    :root { --bg:#f5f7fa; --card:#fff; --fg:#1b1f24; --muted:#57606a; --accent:#1e3a8a; --line:#d0d7de; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#0d1117; --card:#161b22; --fg:#e6edf3; --muted:#8d96a0; --accent:#58a6ff; --line:#30363d; }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, var(--bg), #c3cfe2);
+           min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; color: var(--fg); }
+    .container { max-width: 800px; width: 100%; background: var(--card); border-radius: 12px;
+                 box-shadow: 0 10px 40px rgba(0,0,0,.1); padding: 48px 40px; border: 1px solid var(--line); }
+    h1 { font-size: 1.85rem; color: var(--accent); margin-bottom: 8px; }
+    .badge { display: inline-block; background: #e0e7ff; color: var(--accent); padding: 3px 10px;
+             border-radius: 4px; font-size: .85rem; font-weight: 600; margin-bottom: 20px; }
+    @media (prefers-color-scheme: dark) { .badge { background: #1f2a44; } }
+    .pitch { border-left: 4px solid var(--accent); padding-left: 16px; margin: 20px 0 28px; color: var(--muted); line-height: 1.7; }
+    .pitch p { margin-bottom: 10px; }
+    .meta { font-size: .9rem; color: var(--muted); margin-bottom: 24px; }
+    .meta code { background: var(--bg); padding: 1px 6px; border-radius: 4px; }
+    .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    @media (max-width: 560px) { .cta { grid-template-columns: 1fr; } }
+    .cta a { display: block; text-align: center; text-decoration: none; padding: 14px 18px;
+             border-radius: 8px; font-weight: 600; }
+    .cta .primary { background: var(--accent); color: #fff; }
+    .cta .secondary { border: 1.5px solid var(--accent); color: var(--accent); }
+    ul.links { list-style: none; font-size: .95rem; }
+    ul.links li { margin: 8px 0; }
+    a { color: var(--accent); }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+             font-size: .85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Community Port Authority and Harbor Operations</h1>
+    <div class="badge">ISIC 5222 · maturity unknown</div>
+    <div class="pitch">
+      <p>Open Business Blueprint for ISIC Rev.5 5222: service activities incidental to water transportation (port authority and harbor operations, pilotage, vessel traffic services, aids to navigation and salvage coordination).</p>
+      <p>This repository designs a forkable OSS business for community port authority operations: navigation-safety-scope management, robotics- assisted aids-to-navigation inspection and berth/anchorage monitoring, and vessel-movement booking/reconciliation records — run by a qualified operator so a port authority or harbor master keeps its own safety-certification and navigation-clearance history instead of renting a closed port-operations platform.</p>
+      <p>cloud-itonami-isic-5011 (passenger ferry) and cloud-itonami-isic- 5020 (marine cargo/tanker) are CARRIERS — businesses that move goods or people aboard their own vessel. cloud-itonami-isic-5224 (cargo handling) is a terminal SERVICE that loads and unloads cargo on behalf of multiple carriers. This repository is deliberately scoped to the SEPARATE business of port authority and harbor operations: the infrastructure and navigation-safety authority that governs vessel movement, berthing and pilotage within a port, independent of any single vessel operator or cargo terminal. This is a distinctly licensed activity in every jurisdiction: IMO SOLAS Chapter V (Safety of Navigation) governs vessel traffic services; the International Convention on Salvage 1989 governs salvage operations; Japan's 港湾法 (Port and Harbor Law) licenses port authorities separately from shipping lines and terminal operators; the UK's Harbours Act 1964 and Port Marine Safety Code place statutory navigation-safety duties on harbor authorities distinct from vessel owners; the US Ports and Waterways Safety Act gives the Coast Guard Captain of the Port authority over navigation safety independent of any carrier; and pilotage is frequently licensed as its own profession (e.g. the UK's Pilotage Act 1987).</p>
+    </div>
+    <p class="meta">Domain <code>transport/port-authority</code> · Governor <code>port-authority-governor</code> · License <code>AGPL-3.0-or-later</code></p>
+    <div class="cta">
+      <a class="primary" href="https://itonami.cloud/isco-1212/">Fork + self-host claim</a>
+      <a class="secondary" href="https://itonami.cloud/docs/go-live.md">Paid go-live path</a>
+    </div>
+    <ul class="links">
+      <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-5222">GitHub repository</a></li>
+      <li><a href="./operator-quickstart.md">Operator quickstart</a></li>
+      <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-5222/blob/main/blueprint.edn">blueprint.edn</a></li>
+      <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-5222/blob/main/README.md">README</a></li>
+    </ul>
+    <footer>
+      <p>Open occupation blueprint — no invented usage or revenue metrics. Product face generated for impl-product maturity (Lane C).</p>
+    </footer>
+  </main>
+</body>
+</html>
