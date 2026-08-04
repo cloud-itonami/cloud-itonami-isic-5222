@@ -1,0 +1,40 @@
+{
+  "viewId": "open-ports.SV-1",
+  "viewType": "SV-1",
+  "title": "Systems Interface Description",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "systems": [
+      {
+        "id": "sys.worker", "name": "open-ports Worker",
+        "platform": "Cloudflare Workers", "entrypoint": "worker/src/app.ts",
+        "interfaces": [
+          { "id": "if.xrpc.definePort",                "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.definePort" },
+          { "id": "if.xrpc.listPorts",                 "kind": "XRPC", "method": "GET",  "nsid": "com.etzhayyim.apps.openPorts.listPorts" },
+          { "id": "if.xrpc.registerVessel",            "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.registerVessel" },
+          { "id": "if.xrpc.scheduleVesselCall",        "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.scheduleVesselCall" },
+          { "id": "if.xrpc.recordCallEvent",           "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.recordCallEvent" },
+          { "id": "if.xrpc.listVesselCalls",           "kind": "XRPC", "method": "GET",  "nsid": "com.etzhayyim.apps.openPorts.listVesselCalls" },
+          { "id": "if.xrpc.recordContainerManifest",   "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.recordContainerManifest" },
+          { "id": "if.xrpc.listContainers",            "kind": "XRPC", "method": "GET",  "nsid": "com.etzhayyim.apps.openPorts.listContainers" },
+          { "id": "if.xrpc.reportIncident",            "kind": "XRPC", "method": "POST", "nsid": "com.etzhayyim.apps.openPorts.reportIncident" },
+          { "id": "if.xrpc.listIncidents",             "kind": "XRPC", "method": "GET",  "nsid": "com.etzhayyim.apps.openPorts.listIncidents" }
+        ]
+      },
+      { "id": "sys.d1", "name": "Cloudflare D1 (SQLite)", "platform": "D1",
+        "tables": ["ports", "vessels", "vessel_calls", "call_events", "containers", "incidents"] },
+      { "id": "sys.pds",  "name": "atproto.etzhayyim.com PDS", "platform": "Service binding",
+        "interfaces": [{ "id": "if.pds.post", "kind": "wRPC", "method": "app.bsky.feed.post" }] },
+      { "id": "sys.auth", "name": "auth.etzhayyim.com", "platform": "Service binding",
+        "interfaces": [{ "id": "if.auth.resolveCaller", "kind": "wRPC", "method": "resolveCallerDid" }] }
+    ],
+    "connections": [
+      { "from": "sys.worker", "to": "sys.d1",   "protocol": "D1 binding" },
+      { "from": "sys.worker", "to": "sys.pds",  "protocol": "Service binding (wRPC)" },
+      { "from": "sys.worker", "to": "sys.auth", "protocol": "Service binding (wRPC)" }
+    ]
+  },
+  "refs": { "viewIds": ["open-ports.OV-1", "open-ports.CV-2"] },
+  "version": 1
+}

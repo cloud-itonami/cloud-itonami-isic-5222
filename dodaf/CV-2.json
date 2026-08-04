@@ -1,0 +1,44 @@
+{
+  "viewId": "open-ports.CV-2",
+  "viewType": "CV-2",
+  "title": "Capability Taxonomy",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "capabilities": [
+      {
+        "id": "cap.directory", "name": "Directory",
+        "children": [
+          { "id": "cap.portDef",     "name": "Define port",      "realisedBy": "com.etzhayyim.apps.openPorts.definePort" },
+          { "id": "cap.portList",    "name": "List ports",       "realisedBy": "com.etzhayyim.apps.openPorts.listPorts" },
+          { "id": "cap.vesselReg",   "name": "Register vessel",  "realisedBy": "com.etzhayyim.apps.openPorts.registerVessel" }
+        ]
+      },
+      {
+        "id": "cap.callOps", "name": "Vessel-call operations",
+        "children": [
+          { "id": "cap.callSchedule", "name": "Schedule call",          "realisedBy": "com.etzhayyim.apps.openPorts.scheduleVesselCall" },
+          { "id": "cap.callEvent",    "name": "Record call event (ATA/ATD)", "realisedBy": "com.etzhayyim.apps.openPorts.recordCallEvent" },
+          { "id": "cap.callList",     "name": "List vessel calls",      "realisedBy": "com.etzhayyim.apps.openPorts.listVesselCalls" }
+        ]
+      },
+      {
+        "id": "cap.cargo", "name": "Cargo / containers",
+        "children": [
+          { "id": "cap.manifestRecord", "name": "Record container manifest", "realisedBy": "com.etzhayyim.apps.openPorts.recordContainerManifest" },
+          { "id": "cap.containerList",  "name": "List containers",           "realisedBy": "com.etzhayyim.apps.openPorts.listContainers" }
+        ]
+      },
+      {
+        "id": "cap.safety", "name": "Safety / incidents",
+        "children": [
+          { "id": "cap.incidentReport",   "name": "Report incident",      "realisedBy": "com.etzhayyim.apps.openPorts.reportIncident" },
+          { "id": "cap.incidentSeverity", "name": "Severity decisioning", "realisedBy": "openPorts.incidentSeverity (DMN)" },
+          { "id": "cap.incidentList",     "name": "List incidents",       "realisedBy": "com.etzhayyim.apps.openPorts.listIncidents" }
+        ]
+      }
+    ]
+  },
+  "refs": { "viewIds": ["open-ports.OV-5b", "open-ports.SV-1"] },
+  "version": 1
+}

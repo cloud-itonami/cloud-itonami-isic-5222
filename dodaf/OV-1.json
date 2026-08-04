@@ -1,0 +1,27 @@
+{
+  "viewId": "open-ports.OV-1",
+  "viewType": "OV-1",
+  "title": "High-Level Operational Concept Graphic",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "operationalNodes": [
+      { "id": "operator",  "label": "Vessel operator (DID)" },
+      { "id": "port",      "label": "Port authority (DID)" },
+      { "id": "ports",     "label": "open-ports.etzhayyim.com (Worker)" },
+      { "id": "store",     "label": "D1 (ports/vessels/calls/events/containers/incidents SSoT)" },
+      { "id": "pds",       "label": "atproto.etzhayyim.com (PDS, public audit)" },
+      { "id": "coastGuard","label": "Coast Guard / Port State Control (DID)" }
+    ],
+    "operationalFlows": [
+      { "from": "port",      "to": "ports",      "label": "XRPC (definePort)" },
+      { "from": "operator",  "to": "ports",      "label": "XRPC (registerVessel / scheduleVesselCall / recordCallEvent / recordContainerManifest / reportIncident)" },
+      { "from": "ports",     "to": "store",      "label": "INSERT ports / vessels / calls / events / containers / incidents" },
+      { "from": "ports",     "to": "pds",        "label": "app.bsky.feed.post (severity ≥ major)" },
+      { "from": "pds",       "to": "coastGuard", "label": "follow firehose" }
+    ],
+    "narrative": "A port authority declares berths. Vessel operators register ships and schedule calls. Manifests record container TEU and dangerous goods. Field reports go through severity DMN; major+ incidents auto-publish to the coast-guard audit feed."
+  },
+  "refs": { "viewIds": ["open-ports.SV-1", "open-ports.OV-5b"] },
+  "version": 1
+}

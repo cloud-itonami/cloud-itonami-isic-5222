@@ -1,0 +1,32 @@
+{
+  "viewId": "open-ports.AV-1",
+  "viewType": "AV-1",
+  "title": "Overview and Summary Information",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "purpose": "Provide a DID-addressed maritime port operations service (port + vessel + call + container + incident) as an auditable, open-source reference implementation.",
+    "scope": {
+      "in": ["port directory (UN/LOCODE + berths)", "vessel registry (IMO/MMSI/flag)", "vessel call lifecycle + ATA/ATD events", "container manifest (ISO 6346 + dangerous-goods)", "incident reporting + severity DMN"],
+      "out": ["AIS realtime", "pilot booking / VTS", "customs / single-window", "yard planning"]
+    },
+    "architectureDescriptionContext": {
+      "mission": "Provide tamper-evident, DID-native maritime port primitives open to any AT Protocol client.",
+      "stakeholders": ["port authorities (DIDs)", "vessel operators", "shippers / consignees", "coast guard", "customs"],
+      "environment": "Cloudflare Workers + D1",
+      "standards": ["AT Protocol XRPC", "DoDAF v2.02", "BPMN 2.0", "DMN 1.3", "Camunda Forms", "UN/LOCODE", "IMO ship identification", "ISO 6346 container ID", "IMO IMDG (dangerous goods)"]
+    },
+    "toolsAndMethods": [
+      "XRPC Lexicons (com.etzhayyim.apps.openPorts.*)",
+      "BPMN 2.0 (scheduleVesselCall, reportPortIncident)",
+      "DMN 1.3 (incidentSeverity)",
+      "Camunda Forms"
+    ],
+    "findings": "Vessel-call lifecycle + manifest sufficient for post-hoc port operations record. Severity DMN routes critical pollution / DG events to coast-guard audit feed.",
+    "recommendations": "Add AIS subscription, integrate IMO IMDG dangerous-goods stowage rules, link to open-network for terminal connectivity."
+  },
+  "refs": {
+    "viewIds": ["open-ports.OV-1", "open-ports.OV-5b", "open-ports.OV-6a", "open-ports.CV-2", "open-ports.SV-1"]
+  },
+  "version": 1
+}

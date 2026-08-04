@@ -1,0 +1,37 @@
+{
+  "$schema": "https://etzhayyim.com/schemas/camunda-form/v1",
+  "formKey": "openPorts.scheduleVesselCall.v1",
+  "name": "Schedule Vessel Call",
+  "version": 1,
+  "lexiconRef": "com.etzhayyim.apps.openPorts.scheduleVesselCall",
+  "components": [
+    { "key": "portDid", "label": "Port DID", "type": "textfield",
+      "validate": { "required": true, "pattern": "^did:[a-z]+:.+" } },
+    { "key": "vesselDid", "label": "Vessel DID", "type": "textfield",
+      "validate": { "required": true, "pattern": "^did:[a-z]+:.+" } },
+    { "key": "operatorDid", "label": "Operator DID", "type": "textfield",
+      "validate": { "required": true, "pattern": "^did:[a-z]+:.+" } },
+    { "key": "voyageNumber", "label": "Voyage number", "type": "textfield",
+      "validate": { "required": true, "maxLength": 32 } },
+    { "key": "berthCode", "label": "Berth code", "type": "textfield",
+      "validate": { "required": true, "maxLength": 16 } },
+    { "key": "eta", "label": "ETA (ISO 8601)", "type": "textfield",
+      "validate": { "required": true } },
+    { "key": "etd", "label": "ETD (ISO 8601)", "type": "textfield",
+      "validate": { "required": true } },
+    { "key": "purpose", "label": "Purpose", "type": "select",
+      "validate": { "required": true },
+      "values": [
+        { "label": "Cargo (load)",   "value": "load" },
+        { "label": "Cargo (discharge)", "value": "discharge" },
+        { "label": "Both",           "value": "both" },
+        { "label": "Bunker",         "value": "bunker" },
+        { "label": "Repair / drydock", "value": "repair" }
+      ] }
+  ],
+  "variableMappings": {
+    "portDid": "portDid", "vesselDid": "vesselDid", "operatorDid": "operatorDid",
+    "voyageNumber": "voyageNumber", "berthCode": "berthCode",
+    "eta": "eta", "etd": "etd", "purpose": "purpose"
+  }
+}

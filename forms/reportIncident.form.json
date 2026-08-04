@@ -1,0 +1,41 @@
+{
+  "$schema": "https://etzhayyim.com/schemas/camunda-form/v1",
+  "formKey": "openPorts.reportIncident.v1",
+  "name": "Report Port Incident",
+  "version": 1,
+  "lexiconRef": "com.etzhayyim.apps.openPorts.reportIncident",
+  "components": [
+    { "key": "portDid", "label": "Port DID", "type": "textfield",
+      "validate": { "required": true, "pattern": "^did:[a-z]+:.+" } },
+    { "key": "vesselDid", "label": "Vessel DID (optional)", "type": "textfield",
+      "validate": { "pattern": "^did:[a-z]+:.+" } },
+    { "key": "occurredAt", "label": "Occurred at (ISO 8601)", "type": "textfield",
+      "validate": { "required": true } },
+    { "key": "category", "label": "Category", "type": "select",
+      "validate": { "required": true },
+      "values": [
+        { "label": "Spill / pollution", "value": "spill" },
+        { "label": "Collision / allision", "value": "collision" },
+        { "label": "Fire / explosion", "value": "fire" },
+        { "label": "Grounding",        "value": "grounding" },
+        { "label": "Cargo damage",     "value": "cargo" },
+        { "label": "Personal injury",  "value": "injury" },
+        { "label": "Port-state-control finding", "value": "psc" },
+        { "label": "Other",            "value": "other" }
+      ] },
+    { "key": "pollutionTonnes", "label": "Pollution (tonnes)", "type": "number",
+      "validate": { "required": true, "min": 0 }, "defaultValue": 0 },
+    { "key": "injuries", "label": "Injuries (count)", "type": "number",
+      "validate": { "required": true, "min": 0 }, "defaultValue": 0 },
+    { "key": "dangerousGoodsInvolved", "label": "Dangerous goods involved?", "type": "checkbox", "defaultValue": false },
+    { "key": "collision", "label": "Collision / allision?", "type": "checkbox", "defaultValue": false },
+    { "key": "description", "label": "Description", "type": "textarea",
+      "validate": { "maxLength": 4096 } }
+  ],
+  "variableMappings": {
+    "portDid": "portDid", "vesselDid": "vesselDid", "occurredAt": "occurredAt",
+    "category": "category", "pollutionTonnes": "pollutionTonnes", "injuries": "injuries",
+    "dangerousGoodsInvolved": "dangerousGoodsInvolved", "collision": "collision",
+    "description": "description"
+  }
+}

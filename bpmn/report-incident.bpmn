@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="open-ports-report-incident"
+                  targetNamespace="https://etzhayyim.com/bpmn/open-ports">
+  <bpmn:process id="reportPortIncident" name="Report Port Incident" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_Init" name="Incident detected"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="StartEvent_Init" targetRef="Task_CollectForm"/>
+    <bpmn:userTask id="Task_CollectForm" name="Collect incident form"
+                   camunda:formKey="openPorts.reportIncident.v1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="Task_CollectForm" targetRef="Task_Classify"/>
+    <bpmn:businessRuleTask id="Task_Classify" name="Severity (DMN)"
+                           camunda:decisionRef="openPorts.incidentSeverity"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="Task_Classify" targetRef="Task_Persist"/>
+    <bpmn:serviceTask id="Task_Persist" name="com.etzhayyim.apps.openPorts.reportIncident"
+                      camunda:topic="com.etzhayyim.apps.openPorts.reportIncident"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="Task_Persist" targetRef="Gateway_Cg"/>
+    <bpmn:exclusiveGateway id="Gateway_Cg" name="Coast guard report?" default="f5b"/>
+    <bpmn:sequenceFlow id="f5a" sourceRef="Gateway_Cg" targetRef="Task_AuditPost">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${requireCoastGuardReport == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="f5b" sourceRef="Gateway_Cg" targetRef="EndEvent_Logged"/>
+    <bpmn:serviceTask id="Task_AuditPost" name="Emit app.bsky.feed.post (coast guard audit)"
+                      camunda:topic="app.bsky.feed.post"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="Task_AuditPost" targetRef="EndEvent_Reported"/>
+    <bpmn:endEvent id="EndEvent_Logged" name="Incident logged"/>
+    <bpmn:endEvent id="EndEvent_Reported" name="Coast guard notified"/>
+  </bpmn:process>
+</bpmn:definitions>

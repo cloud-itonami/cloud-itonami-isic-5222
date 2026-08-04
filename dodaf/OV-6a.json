@@ -1,0 +1,53 @@
+{
+  "viewId": "open-ports.OV-6a",
+  "viewType": "OV-6a",
+  "title": "Operational Rules Model",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "businessRules": [
+      {
+        "id": "rule.unlocode",
+        "statement": "port.unLocode MUST match ^[A-Z]{2}[A-Z0-9]{3}$ (UN/LOCODE) and be unique.",
+        "kind": "constraint",
+        "enforcedBy": "worker/src/app.ts:definePort() validation + UNIQUE(un_locode)"
+      },
+      {
+        "id": "rule.imoFormat",
+        "statement": "vessel.imoNumber MUST match ^IMO\\d{7}$. mmsi MUST match ^\\d{9}$. flag is ISO-3166 alpha-2.",
+        "kind": "constraint",
+        "enforcedBy": "worker/src/app.ts:registerVessel() validation"
+      },
+      {
+        "id": "rule.callLifecycle",
+        "statement": "Call event order: scheduled → arrived → berthed → unberthed → departed → completed. cancelled allowed before berthed; out-of-order returns Conflict 409.",
+        "kind": "invariant",
+        "enforcedBy": "worker/src/app.ts:recordCallEvent() state machine"
+      },
+      {
+        "id": "rule.containerIso6346",
+        "statement": "container.containerId MUST match ^[A-Z]{4}\\d{7}$ (ISO 6346 BIC + serial + check). dangerousGoods.unNumber MUST match ^UN\\d{4}$ when present.",
+        "kind": "constraint",
+        "enforcedBy": "worker/src/app.ts:recordContainerManifest() validation"
+      },
+      {
+        "id": "rule.incidentSeverity",
+        "statement": "pollution ≥ 100t → critical; injuries ≥ 1 OR DG involved OR collision → major; pollution ≥ 1t → moderate; else minor. severity ≥ major → coast-guard report.",
+        "kind": "decisionTable",
+        "dmnDecisionKey": "openPorts.incidentSeverity",
+        "source": "dmn/incident-severity.dmn"
+      },
+      {
+        "id": "rule.appendOnlyIncident",
+        "statement": "Incident records are append-only. Updates create a new incident with supersedes pointing at the original.",
+        "kind": "invariant",
+        "enforcedBy": "no UPDATE on incidents core fields"
+      }
+    ]
+  },
+  "refs": {
+    "dmnDecisionKeys": ["openPorts.incidentSeverity"],
+    "viewIds": ["open-ports.OV-5b"]
+  },
+  "version": 1
+}

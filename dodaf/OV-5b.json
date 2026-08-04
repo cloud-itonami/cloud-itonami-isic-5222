@@ -1,0 +1,46 @@
+{
+  "viewId": "open-ports.OV-5b",
+  "viewType": "OV-5b",
+  "title": "Operational Activity Model",
+  "did": "did:web:open-ports.etzhayyim.com",
+  "format": "json",
+  "content": {
+    "activities": [
+      { "id": "act.definePort", "name": "Define Port", "type": "xrpc",
+        "realisedBy": [{ "xrpc": "com.etzhayyim.apps.openPorts.definePort" }] },
+      { "id": "act.registerVessel", "name": "Register Vessel", "type": "xrpc",
+        "realisedBy": [{ "xrpc": "com.etzhayyim.apps.openPorts.registerVessel" }] },
+      { "id": "act.scheduleVesselCall", "name": "Schedule Vessel Call", "type": "bpmn",
+        "bpmnProcessKey": "scheduleVesselCall", "source": "bpmn/schedule-call.bpmn",
+        "realisedBy": [
+          { "xrpc": "com.etzhayyim.apps.openPorts.scheduleVesselCall" },
+          { "form": "openPorts.scheduleVesselCall.v1" }
+        ] },
+      { "id": "act.recordCallEvent", "name": "Record Call Event", "type": "xrpc",
+        "realisedBy": [{ "xrpc": "com.etzhayyim.apps.openPorts.recordCallEvent" }] },
+      { "id": "act.recordContainerManifest", "name": "Record Container Manifest", "type": "xrpc",
+        "realisedBy": [{ "xrpc": "com.etzhayyim.apps.openPorts.recordContainerManifest" }] },
+      { "id": "act.reportIncident", "name": "Report Incident", "type": "bpmn",
+        "bpmnProcessKey": "reportPortIncident", "source": "bpmn/report-incident.bpmn",
+        "realisedBy": [
+          { "xrpc": "com.etzhayyim.apps.openPorts.reportIncident" },
+          { "form": "openPorts.reportIncident.v1" },
+          { "dmn":  "openPorts.incidentSeverity" }
+        ] },
+      { "id": "act.queryNetwork", "name": "Query Ports / Calls / Containers / Incidents", "type": "xrpc",
+        "realisedBy": [
+          { "xrpc": "com.etzhayyim.apps.openPorts.listPorts" },
+          { "xrpc": "com.etzhayyim.apps.openPorts.listVesselCalls" },
+          { "xrpc": "com.etzhayyim.apps.openPorts.listContainers" },
+          { "xrpc": "com.etzhayyim.apps.openPorts.listIncidents" }
+        ] }
+    ]
+  },
+  "refs": {
+    "bpmnProcessKeys": ["scheduleVesselCall", "reportPortIncident"],
+    "dmnDecisionKeys": ["openPorts.incidentSeverity"],
+    "formKeys": ["openPorts.scheduleVesselCall.v1", "openPorts.reportIncident.v1"],
+    "viewIds": ["open-ports.OV-6a", "open-ports.SV-1"]
+  },
+  "version": 1
+}
