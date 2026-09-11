@@ -1,5 +1,5 @@
 (ns portauthority.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean clearance through
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean clearance through
   service-record logging (auto-commits at phase 3) -> berth/tug/pilot
   scheduling (escalates/approve/commit) -> a navigation-safety-concern
   flag (ALWAYS escalates/approve/commit) -> facility maintenance

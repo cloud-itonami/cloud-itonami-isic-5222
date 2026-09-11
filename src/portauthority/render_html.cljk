@@ -8,7 +8,7 @@
   `portauthority.phase` -> `portauthority.store`) as a compiled
   langgraph StateGraph (`portauthority.operation/build` +
   `langgraph.graph/run*`), through a scenario extended from this repo's
-  own `portauthority.sim` demo driver (`clojure -M:dev:run`, run BEFORE
+  own `portauthority.sim` demo driver (`kbb -M:dev:run`, run BEFORE
   writing this file to confirm the seeded ids `clr-1`..`clr-3` /
   `fac-1`..`fac-2` and the four coordination ops behave as documented).
 
@@ -36,7 +36,7 @@
   `registry` sequence numbers are jurisdiction-scoped counters, so two
   consecutive runs are byte-identical (verified with `cmp`).
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [clojure.java.io :as io]
             [kotoba.lang.text :as str]
@@ -502,7 +502,7 @@
      (section
       "This page"
       (str "Generated at build time by " (code 'portauthority.render-html)
-           " (<code>clojure -M:dev:render-html</code>) by actually running "
+           " (<code>kbb -M:dev:render-html</code>) by actually running "
            (esc (str (count runs)))
            " coordination operations through the shipped actor graph. "
            "Nothing below is mock HTML: the tables are the real store, the real "
@@ -524,7 +524,7 @@
      (records-section db)
      "</main>\n"
      "<footer>\n"
-     "  <p>Read-only sample. Regenerate with <code>clojure -M:dev:render-html</code>. "
+     "  <p>Read-only sample. Regenerate with <code>kbb -M:dev:render-html</code>. "
      "Deterministic: no timestamps, no random ids &mdash; two consecutive runs are "
      "byte-identical.</p>\n"
      "</footer>\n"
