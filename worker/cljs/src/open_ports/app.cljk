@@ -70,7 +70,7 @@
    :app/routes ["open-ports.etzhayyim.com/*"]
    :app/vars ["AGENTGATEWAY_MCP_ROUTER_URL" "APP_FRAMEWORK" "APP_HANDLE" "PRIMARY_DID"]
    :app/xrpc? false
-   :app/relative-path "worker/cljs/src/open_ports/app.cljs"})
+   :app/relative-path "worker/cljs/src/open_ports/app.cljk"})
 
 (rf/reg-event-db
  :initialize-db
