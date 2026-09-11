@@ -2475,7 +2475,7 @@ img,svg { max-width: 100%; height: auto; }
 <main>
   <section class="card">
     <h2>This page</h2>
-    <p class="muted">Generated at build time by <code>portauthority.render-html</code> (<code>clojure -M:dev:render-html</code>) by actually running 13 coordination operations through the shipped actor graph. Nothing below is mock HTML: the tables are the real store, the real append-only ledger, and the real graph audit channel.</p>
+    <p class="muted">Generated at build time by <code>portauthority.render-html</code> (<code>kbb -M:dev:render-html</code>) by actually running 13 coordination operations through the shipped actor graph. Nothing below is mock HTML: the tables are the real store, the real append-only ledger, and the real graph audit channel.</p>
     <table>
       <thead><tr><th>Measure</th><th>Value</th></tr></thead>
       <tbody>
@@ -2598,6 +2598,6 @@ img,svg { max-width: 100%; height: auto; }
   </section>
 </main>
 <footer>
-  <p>Read-only sample. Regenerate with <code>clojure -M:dev:render-html</code>. Deterministic: no timestamps, no random ids &mdash; two consecutive runs are byte-identical.</p>
+  <p>Read-only sample. Regenerate with <code>kbb -M:dev:render-html</code>. Deterministic: no timestamps, no random ids &mdash; two consecutive runs are byte-identical.</p>
 </footer>
 </body></html>
