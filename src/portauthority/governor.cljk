@@ -63,7 +63,7 @@
   own happy path. Every pattern below is phrased as the
   FINALIZATION/EXECUTION ACTION ('finalize the berth-safety clearance',
   'waive the pilotage requirement', 'authorize the vessel movement'),
-  never the bare noun -- `test/portauthority/scope_exclusion_test.clj`
+  never the bare noun -- `test/portauthority/scope_exclusion_test.cljk`
   asserts directly that every one of `portauthority.advisor`'s four
   default proposals passes this check cleanly.
 
