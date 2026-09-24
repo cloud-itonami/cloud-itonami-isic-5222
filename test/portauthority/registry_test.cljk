@@ -1,5 +1,5 @@
 (ns portauthority.registry-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [portauthority.registry :as registry]))
 
 (deftest register-service-record-drafts-a-record
