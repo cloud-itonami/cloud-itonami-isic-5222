@@ -3,7 +3,7 @@
   regress on: `:flag-navigation-safety-concern` must NEVER be a member
   of any phase's `:auto` set."
   (:require [kotoba.test :refer [deftest is testing]]
-            [clojure.set :as set]
+            [kotoba.lang.coll :as set]
             [portauthority.phase :as phase]))
 
 (deftest flag-navigation-safety-concern-never-auto-at-any-phase
