@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README "Robotics premise": for a port authority / harbour operator
+;; (ISIC 5222) robots do aids-to-navigation inspection, berth/anchorage
+;; monitoring and buoy tending, gated by the Port Authority Governor.
+;; Physical work modelled here: the buoy-tending arm swapping a buoy's
+;; lantern module, and the tensile check of a buoy mooring-chain link whose
+;; bar diameter has been reduced by corrosion wastage.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-5222"
+ :cases
+ [{:id :buoy-lantern-swap
+   :kind :manipulator
+   :procedure "buoy-tender arm lifts the replacement lantern module from the work-boat deck onto the buoy's top mark"
+   :params {:l1-m 0.90 :l2-m 0.80 :m1-kg 16.0 :m2-kg 11.0
+            :from [1.10 -0.30] :to [0.50 1.10] :duration-s 3.0 :steps 500}
+   :sweep {:param :payload-kg :values [5.0 10.0 20.0 30.0 40.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 600.0 :basis "estimate: continuous shoulder torque of a ~25 kg-payload marine-rated arm class"}
+   :boundary {:lo 1.0 :hi 120.0}}
+  {:id :mooring-chain-link-wastage
+   :kind :material
+   :procedure "tensile check of a buoy mooring-chain link (two legs, nominal 26 mm bar) at the diameter left after corrosion wastage"
+   :params {:length-m 0.15 :youngs-modulus-pa 205.0e9 :yield-stress-pa 300.0e6 :hardening-pa 1.0e9
+            :density-kg-m3 7850.0 :max-force-n 500000.0}
+   :sweep {:param :area-m2 :values [1.062e-3 9.82e-4 9.05e-4 8.31e-4 7.60e-4]}
+   :quantity :yield-force-n
+   :limit {:min 250000.0 :basis "estimate: minimum yield load kept for the buoy's design mooring tension with margin (chain grade and proof load not yet sourced)"}
+   :boundary {:lo 7.0e-4 :hi 1.062e-3}}]}
